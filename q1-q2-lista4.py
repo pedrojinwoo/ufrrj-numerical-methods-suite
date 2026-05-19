@@ -32,3 +32,27 @@ prevMerge = beta * instancia * math.log2(instancia)
 print(f"Tarefa 2: Projeção para x = 100:")
 print(f"  Tempo Bubble Sort: {prevBubble:.2f} ms")
 print(f"  Tempo Merge Sort:  {prevMerge:.2f} ms\n")
+
+
+
+print("=== EXERCÍCIO 2 ===")
+T_ex2 = [0, 5, 10, 15, 20]
+Theta_ex2 = [120, 95, 75, 60, 48]
+Y_linearizado = [math.log(theta) for theta in Theta_ex2]
+
+m = len(T_ex2)
+sumT = sum(T_ex2)
+sumT2 = sum(t**2 for t in T_ex2)
+sumY = sum(Y_linearizado)
+sumTY = sum(T_ex2[i] * Y_linearizado[i] for i in range(m))
+MatrizA = [[m, sumT], [sumT, sumT2]]
+VetorB = [sumY, sumTY]
+A0, A1 = systemSolver(MatrizA, VetorB)
+theta_0 = math.exp(A0)
+k = -A1  
+
+print("Tarefa 1: Modelo Exponencial Ajustado:")
+print(f"  g(t) = {theta_0:.4f} * e^(-{k:.4f} * t)")
+t_alvo = 17
+theta17 = theta_0 * math.exp(-k * t_alvo)
+print(f"Tarefa 2: Temperatura estimada para t = 17 min: {theta17:.2f} °C\n")
